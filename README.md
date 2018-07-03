@@ -18,6 +18,6 @@ $ ansible-playbook -i inventory coredns.yml
 ## Post Deployment
 
 ```bash
-$ dig openshift.wizard.io @192.168.2.30
+$ dig openshift.dev.io @192.168.2.30
 $ dig google.com @192.168.2.30
 ```
