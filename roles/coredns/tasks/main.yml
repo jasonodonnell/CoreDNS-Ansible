@@ -6,8 +6,8 @@
     permanent: true
     state: enabled
   with_items:
-  - '53/tcp'
-  - '53/udp'
+  - "53/tcp"
+  - "53/udp"
 
 - name: Bounce Firewalld
   become: yes
@@ -34,8 +34,8 @@
     group: root
     mode: 0644
   with_items:
-  - 'Corefile'
-  - 'db.dev.io'
+  - "Corefile"
+  - "db.dev.io"
 
 - name: Copy CoreDNS Service File
   become: yes
