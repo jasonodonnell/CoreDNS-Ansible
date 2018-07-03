@@ -8,15 +8,6 @@
     group: "{{ user }}"
     mode: 0644
 
-- name: Copy env file
-  become: yes
-  copy:
-    src: files/env10.sh
-    dest: "/home/{{ user }}/env10.sh"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: 0755
-
 - name: Install Extra Packages
   become: yes
   yum: name={{item}} state=installed
