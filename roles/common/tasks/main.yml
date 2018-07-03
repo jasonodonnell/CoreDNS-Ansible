@@ -19,7 +19,9 @@
 
 - name: Install Extra Packages
   become: yes
-  yum: name={{item}} state=installed
+  yum:
+    name: "{{ item }}"
+    state: installed
   with_items:
   - golang
   - git
