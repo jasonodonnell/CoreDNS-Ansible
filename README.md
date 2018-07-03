@@ -1,5 +1,7 @@
 # CoreDNS Deployment
 
+Deploys a [CoreDNS](https://github.com/coredns/coredns) VM for development purposes.
+
 Built on:
 
 * Ansible 2.4
