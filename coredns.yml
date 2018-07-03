@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars:
+    user: 'vagrant'
+  roles:
+  - common
+
+- hosts: coredns
+  vars:
+    coredns_ver: "1.1.3"
+  roles:
+  - coredns

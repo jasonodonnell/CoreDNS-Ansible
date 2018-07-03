@@ -1,0 +1,67 @@
+---
+- name: Configure Firewalld
+  become: yes
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+  with_items:
+  - '53/tcp'
+  - '53/udp'
+
+- name: Bounce Firewalld
+  become: yes
+  service:
+    name: "firewalld"
+    enabled: yes
+    state: restarted
+
+- name: Ensure CoreDNS Directory
+  become: yes
+  file:
+    path: /etc/coredns
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: 0755
+
+- name: Copy CoreDNS Service File
+  become: yes
+  copy:
+    src: files/{{ item }}
+    dest: /etc/coredns/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+  - 'Corefile'
+  - 'db.dev.io'
+
+- name: Copy CoreDNS Service File
+  become: yes
+  copy:
+    src: files/coredns.service
+    dest: /etc/systemd/system/coredns.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Download CoredDNS
+  get_url:
+    url: "https://github.com/coredns/coredns/releases/download/v{{ coredns_ver}}/coredns_{{ coredns_ver }}_linux_amd64.tgz"
+    dest: "/tmp/coredns.tgz"
+    mode: 0755
+
+- name: Extract CoreDNS
+  become: yes
+  unarchive:
+    src: /tmp/coredns.tgz
+    dest: /usr/bin/
+    remote_src: yes
+
+- name: Enable CoreDNS
+  become: yes
+  service:
+    name: coredns
+    enabled: yes
+    state: started

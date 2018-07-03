@@ -1,0 +1,12 @@
+[all:vars]
+ansible_connection=ssh 
+ansible_ssh_user=vagrant
+ansible_ssh_private_key_file=./keys/id_rsa
+ansible_become_pass=vagrant
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[all]
+192.168.2.30
+
+[coredns]
+192.168.2.30
