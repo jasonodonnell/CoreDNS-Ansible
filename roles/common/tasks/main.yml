@@ -3,7 +3,7 @@
   become: yes
   copy:
     src: files/bashrc
-    dest: "/home/{{ user }}/.bashrc"
+    dest: /home/{{ user }}/.bashrc
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: 0644

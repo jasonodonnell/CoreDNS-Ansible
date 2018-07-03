@@ -6,13 +6,13 @@
     permanent: true
     state: enabled
   with_items:
-  - "53/tcp"
-  - "53/udp"
+  - 53/tcp
+  - 53/udp
 
 - name: Bounce Firewalld
   become: yes
   service:
-    name: "firewalld"
+    name: firewalld
     enabled: yes
     state: restarted
 
@@ -21,8 +21,8 @@
   file:
     path: /etc/coredns
     state: directory
-    owner: "root"
-    group: "root"
+    owner: root
+    group: root
     mode: 0755
 
 - name: Copy CoreDNS Service File
@@ -34,8 +34,8 @@
     group: root
     mode: 0644
   with_items:
-  - "Corefile"
-  - "db.dev.io"
+  - Corefile
+  - db.dev.io
 
 - name: Copy CoreDNS Service File
   become: yes
@@ -48,8 +48,8 @@
 
 - name: Download CoredDNS
   get_url:
-    url: "https://github.com/coredns/coredns/releases/download/v{{ coredns_ver}}/coredns_{{ coredns_ver }}_linux_amd64.tgz"
-    dest: "/tmp/coredns.tgz"
+    url: https://github.com/coredns/coredns/releases/download/v{{ coredns_ver}}/coredns_{{ coredns_ver }}_linux_amd64.tgz
+    dest: /tmp/coredns.tgz
     mode: 0755
 
 - name: Extract CoreDNS
